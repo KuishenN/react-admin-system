@@ -1,28 +1,31 @@
 import React, { Component } from 'react'
 
-import { Button } from 'antd'
+import { Route, Switch, Redirect }  from 'react-router-dom'
+import { adminRouter } from './routers'
 
-const withApp = (WrappedComponent) =>  {
-  // WrappedComponent react中camel的语法组件中不支持
-  return class WithApp extends Component {
-    render () {
-      return (
-        <>
-          <WrappedComponent />
-          <div>高阶组件的测试</div>
-        </>
-      )
-    }
-  }
-}
-
-@withApp
+// 配置内嵌路由
 class App extends Component {
   render() {
     return (
       <div>
-        {11111}
-        app <Button type="primary">111</Button>
+        <div>这里是公共的部分</div>
+        <Switch>
+          {
+            adminRouter.map(route => {
+              return (
+                <Route
+                  key={route.pathname} 
+                  path={route.pathname} 
+                  exact={route.exact}
+                  render={(routerProps) => {
+                return <route.component {...routerProps} />
+              }} />)
+            })
+          }
+          {/* 用于判断当时admin时跳转的主页路径 */}
+          <Redirect to="/admin/dashboard" from="/admin" exact />
+          <Redirect to="/404" />
+        </Switch> 
       </div>
     )
   }

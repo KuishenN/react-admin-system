@@ -1,10 +1,10 @@
-import React, { Component } from './node_modules/react'
+import React, { Component } from 'react'
 
 export default class ArticleList extends Component {
   render() {
     return (
       <div>
-        Article
+        文章列表页
       </div>
     )
   }

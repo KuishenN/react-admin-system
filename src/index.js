@@ -15,6 +15,7 @@ ReactDOM.render(
   <Router>
     <Switch>
       <Route path='/admin' render={(routerProps) => {
+        // 设置权限 需要登陆才能访问admin
         return <App {...routerProps} />
       }}/>
       {
