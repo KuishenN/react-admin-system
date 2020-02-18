@@ -1,12 +1,31 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import ReactDOM from 'react-dom'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import App from './App'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+import './index.less'
+
+import { mainRouter } from './routers'
+
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+
+
+
+ReactDOM.render(
+  <Router>
+    <Switch>
+      <Route path='/admin' render={(routerProps) => {
+        return <App {...routerProps} />
+      }}/>
+      {
+        mainRouter.map(router => {
+          return <Route key={router.pathname} path={router.pathname} component={router.component} />
+        })
+      }
+      {/* {exact 完全匹配跳转到admin} */}
+      <Redirect to="/admin" from='/' exact />
+      <Redirect to="/404" />
+    </Switch>
+  </Router>,
+  document.getElementById('root')
+)
