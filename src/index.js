@@ -5,8 +5,7 @@ import App from './App'
 
 import './index.less'
 
-import { mainRouter } from './routers'
-
+import { mainRoutes } from './routers'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 
 
@@ -19,7 +18,7 @@ ReactDOM.render(
         return <App {...routerProps} />
       }}/>
       {
-        mainRouter.map(router => {
+        mainRoutes.map(router => {
           return <Route key={router.pathname} path={router.pathname} component={router.component} />
         })
       }

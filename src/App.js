@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 
 import { Route, Switch, Redirect }  from 'react-router-dom'
-import { adminRouter } from './routers'
+import { adminRoutes } from './routers'
+
+import { Frame } from './components'
 
 // 配置内嵌路由
 class App extends Component {
   render() {
     return (
-      <div>
-        <div>这里是公共的部分</div>
+      <Frame adminRoutes={adminRoutes}>
         <Switch>
           {
-            adminRouter.map(route => {
+            adminRoutes.map(route => {
               return (
                 <Route
                   key={route.pathname} 
@@ -26,7 +27,7 @@ class App extends Component {
           <Redirect to="/admin/dashboard" from="/admin" exact />
           <Redirect to="/404" />
         </Switch> 
-      </div>
+      </Frame>
     )
   }
 }
